@@ -4,7 +4,7 @@
 #
 Name     : calc
 Version  : 2.12.7.2
-Release  : 2
+Release  : 3
 URL      : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
 Source0  : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
 Summary  : No detailed summary available
@@ -12,9 +12,9 @@ Group    : Development/Tools
 License  : LGPL-2.1
 Requires: calc-bin = %{version}-%{release}
 Requires: calc-data = %{version}-%{release}
+Requires: calc-lib = %{version}-%{release}
 Requires: calc-license = %{version}-%{release}
 Requires: calc-man = %{version}-%{release}
-Requires: calc-plugins = %{version}-%{release}
 BuildRequires : less
 BuildRequires : util-linux
 
@@ -44,12 +44,23 @@ data components for the calc package.
 %package dev
 Summary: dev components for the calc package.
 Group: Development
+Requires: calc-lib = %{version}-%{release}
 Requires: calc-bin = %{version}-%{release}
 Requires: calc-data = %{version}-%{release}
 Provides: calc-devel = %{version}-%{release}
 
 %description dev
 dev components for the calc package.
+
+
+%package lib
+Summary: lib components for the calc package.
+Group: Libraries
+Requires: calc-data = %{version}-%{release}
+Requires: calc-license = %{version}-%{release}
+
+%description lib
+lib components for the calc package.
 
 
 %package license
@@ -68,14 +79,6 @@ Group: Default
 man components for the calc package.
 
 
-%package plugins
-Summary: plugins components for the calc package.
-Group: Default
-
-%description plugins
-plugins components for the calc package.
-
-
 %prep
 %setup -q -n calc-2.12.7.2
 
@@ -84,18 +87,18 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1553276685
+export SOURCE_DATE_EPOCH=1553278796
 export LDFLAGS="${LDFLAGS} -fno-lto"
 make
 
 
 %install
-export SOURCE_DATE_EPOCH=1553276685
+export SOURCE_DATE_EPOCH=1553278796
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp COPYING %{buildroot}/usr/share/package-licenses/calc/COPYING
 cp COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/COPYING-LGPL
-%make_install T=%{buildroot}
+%make_install T=%{buildroot} LIBDIR=/usr/lib64
 
 %files
 %defattr(-,root,root,-)
@@ -617,8 +620,13 @@ cp COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/COPYING-LGPL
 /usr/include/calc/zmath.h
 /usr/include/calc/zrand.h
 /usr/include/calc/zrandom.h
-/usr/lib/libcalc.so
-/usr/lib/libcustcalc.so
+/usr/lib64/libcalc.so
+/usr/lib64/libcustcalc.so
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/libcalc.so.2.12.7.2
+/usr/lib64/libcustcalc.so.2.12.7.2
 
 %files license
 %defattr(0644,root,root,0755)
@@ -628,8 +636,3 @@ cp COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/COPYING-LGPL
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/calc.1
-
-%files plugins
-%defattr(-,root,root,-)
-/usr/lib/libcalc.so.2.12.7.2
-/usr/lib/libcustcalc.so.2.12.7.2
