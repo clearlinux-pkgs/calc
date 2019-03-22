@@ -4,23 +4,53 @@
 #
 Name     : calc
 Version  : 2.12.7.2
-Release  : 1
+Release  : 2
 URL      : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
 Source0  : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
-Summary  : Arbitrary precision console calculator
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
+Requires: calc-bin = %{version}-%{release}
+Requires: calc-data = %{version}-%{release}
 Requires: calc-license = %{version}-%{release}
+Requires: calc-man = %{version}-%{release}
+Requires: calc-plugins = %{version}-%{release}
 BuildRequires : less
 BuildRequires : util-linux
 
 %description
-# What is calc?
-Calc is an interactive calculator which provides for easy large
-Otherwise, it enters interactive mode.  In this mode, it accepts
-commands one at a time, processes them, and displays the answers.
-In the simplest case, commands are simply expressions which are
-evaluated.  For example, the following line can be input:
+Calc standard resource files
+----------------------------
+To load a resource file, try:
+
+%package bin
+Summary: bin components for the calc package.
+Group: Binaries
+Requires: calc-data = %{version}-%{release}
+Requires: calc-license = %{version}-%{release}
+
+%description bin
+bin components for the calc package.
+
+
+%package data
+Summary: data components for the calc package.
+Group: Data
+
+%description data
+data components for the calc package.
+
+
+%package dev
+Summary: dev components for the calc package.
+Group: Development
+Requires: calc-bin = %{version}-%{release}
+Requires: calc-data = %{version}-%{release}
+Provides: calc-devel = %{version}-%{release}
+
+%description dev
+dev components for the calc package.
+
 
 %package license
 Summary: license components for the calc package.
@@ -28,6 +58,22 @@ Group: Default
 
 %description license
 license components for the calc package.
+
+
+%package man
+Summary: man components for the calc package.
+Group: Default
+
+%description man
+man components for the calc package.
+
+
+%package plugins
+Summary: plugins components for the calc package.
+Group: Default
+
+%description plugins
+plugins components for the calc package.
 
 
 %prep
@@ -38,23 +84,552 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1553233100
+export SOURCE_DATE_EPOCH=1553276685
 export LDFLAGS="${LDFLAGS} -fno-lto"
 make
 
 
 %install
-export SOURCE_DATE_EPOCH=1553233100
+export SOURCE_DATE_EPOCH=1553276685
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp COPYING %{buildroot}/usr/share/package-licenses/calc/COPYING
 cp COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/COPYING-LGPL
-%make_install
+%make_install T=%{buildroot}
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/calc
+/usr/bin/cscript/4dsphere
+/usr/bin/cscript/fproduct
+/usr/bin/cscript/mersenne
+/usr/bin/cscript/piforever
+/usr/bin/cscript/plus
+/usr/bin/cscript/powerterm
+/usr/bin/cscript/simple
+/usr/bin/cscript/square
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/calc/README
+/usr/share/calc/alg_config.cal
+/usr/share/calc/beer.cal
+/usr/share/calc/bernoulli.cal
+/usr/share/calc/bernpoly.cal
+/usr/share/calc/bigprime.cal
+/usr/share/calc/bindings
+/usr/share/calc/brentsolve.cal
+/usr/share/calc/chi.cal
+/usr/share/calc/chrem.cal
+/usr/share/calc/constants.cal
+/usr/share/calc/custhelp/argv
+/usr/share/calc/custhelp/devnull
+/usr/share/calc/custhelp/help
+/usr/share/calc/custhelp/pmodm127
+/usr/share/calc/custhelp/pzasusb8
+/usr/share/calc/custhelp/register
+/usr/share/calc/custhelp/sysinfo
+/usr/share/calc/custom/argv.cal
+/usr/share/calc/custom/halflen.cal
+/usr/share/calc/custom/pmodm127.cal
+/usr/share/calc/custom/pzasusb8.cal
+/usr/share/calc/custom/register.cal
+/usr/share/calc/deg.cal
+/usr/share/calc/dms.cal
+/usr/share/calc/dotest.cal
+/usr/share/calc/ellip.cal
+/usr/share/calc/factorial.cal
+/usr/share/calc/factorial2.cal
+/usr/share/calc/gvec.cal
+/usr/share/calc/hello.cal
+/usr/share/calc/help/COPYING
+/usr/share/calc/help/COPYING-LGPL
+/usr/share/calc/help/abs
+/usr/share/calc/help/access
+/usr/share/calc/help/acos
+/usr/share/calc/help/acosh
+/usr/share/calc/help/acot
+/usr/share/calc/help/acoth
+/usr/share/calc/help/acsc
+/usr/share/calc/help/acsch
+/usr/share/calc/help/address
+/usr/share/calc/help/agd
+/usr/share/calc/help/append
+/usr/share/calc/help/appr
+/usr/share/calc/help/archive
+/usr/share/calc/help/arg
+/usr/share/calc/help/argv
+/usr/share/calc/help/arrow
+/usr/share/calc/help/asec
+/usr/share/calc/help/asech
+/usr/share/calc/help/asin
+/usr/share/calc/help/asinh
+/usr/share/calc/help/assign
+/usr/share/calc/help/assoc
+/usr/share/calc/help/atan
+/usr/share/calc/help/atan2
+/usr/share/calc/help/atanh
+/usr/share/calc/help/avg
+/usr/share/calc/help/base
+/usr/share/calc/help/base2
+/usr/share/calc/help/bernoulli
+/usr/share/calc/help/binding
+/usr/share/calc/help/bindings
+/usr/share/calc/help/bit
+/usr/share/calc/help/blk
+/usr/share/calc/help/blkcpy
+/usr/share/calc/help/blkfree
+/usr/share/calc/help/blocks
+/usr/share/calc/help/bround
+/usr/share/calc/help/btrunc
+/usr/share/calc/help/bug
+/usr/share/calc/help/bugs
+/usr/share/calc/help/builtin
+/usr/share/calc/help/calc_tty
+/usr/share/calc/help/calclevel
+/usr/share/calc/help/calcpath
+/usr/share/calc/help/catalan
+/usr/share/calc/help/ceil
+/usr/share/calc/help/cfappr
+/usr/share/calc/help/cfsim
+/usr/share/calc/help/change
+/usr/share/calc/help/changes
+/usr/share/calc/help/char
+/usr/share/calc/help/cmdbuf
+/usr/share/calc/help/cmp
+/usr/share/calc/help/comb
+/usr/share/calc/help/command
+/usr/share/calc/help/config
+/usr/share/calc/help/conj
+/usr/share/calc/help/contrib
+/usr/share/calc/help/cos
+/usr/share/calc/help/cosh
+/usr/share/calc/help/cot
+/usr/share/calc/help/coth
+/usr/share/calc/help/count
+/usr/share/calc/help/cp
+/usr/share/calc/help/credit
+/usr/share/calc/help/csc
+/usr/share/calc/help/csch
+/usr/share/calc/help/cscript
+/usr/share/calc/help/ctime
+/usr/share/calc/help/custom
+/usr/share/calc/help/custom_cal
+/usr/share/calc/help/define
+/usr/share/calc/help/delete
+/usr/share/calc/help/den
+/usr/share/calc/help/dereference
+/usr/share/calc/help/det
+/usr/share/calc/help/digit
+/usr/share/calc/help/digits
+/usr/share/calc/help/display
+/usr/share/calc/help/dp
+/usr/share/calc/help/environment
+/usr/share/calc/help/epsilon
+/usr/share/calc/help/errcount
+/usr/share/calc/help/errmax
+/usr/share/calc/help/errno
+/usr/share/calc/help/error
+/usr/share/calc/help/errorcode
+/usr/share/calc/help/errorcodes
+/usr/share/calc/help/estr
+/usr/share/calc/help/euler
+/usr/share/calc/help/eval
+/usr/share/calc/help/exp
+/usr/share/calc/help/expression
+/usr/share/calc/help/fact
+/usr/share/calc/help/factor
+/usr/share/calc/help/fclose
+/usr/share/calc/help/fcnt
+/usr/share/calc/help/feof
+/usr/share/calc/help/ferror
+/usr/share/calc/help/fflush
+/usr/share/calc/help/fgetc
+/usr/share/calc/help/fgetfield
+/usr/share/calc/help/fgetfile
+/usr/share/calc/help/fgetline
+/usr/share/calc/help/fgets
+/usr/share/calc/help/fgetstr
+/usr/share/calc/help/fib
+/usr/share/calc/help/file
+/usr/share/calc/help/files
+/usr/share/calc/help/floor
+/usr/share/calc/help/fopen
+/usr/share/calc/help/forall
+/usr/share/calc/help/fpathopen
+/usr/share/calc/help/fprintf
+/usr/share/calc/help/fputc
+/usr/share/calc/help/fputs
+/usr/share/calc/help/fputstr
+/usr/share/calc/help/frac
+/usr/share/calc/help/free
+/usr/share/calc/help/freebernoulli
+/usr/share/calc/help/freeeuler
+/usr/share/calc/help/freeglobals
+/usr/share/calc/help/freeredc
+/usr/share/calc/help/freestatics
+/usr/share/calc/help/frem
+/usr/share/calc/help/freopen
+/usr/share/calc/help/fscan
+/usr/share/calc/help/fscanf
+/usr/share/calc/help/fseek
+/usr/share/calc/help/fsize
+/usr/share/calc/help/ftell
+/usr/share/calc/help/full
+/usr/share/calc/help/gcd
+/usr/share/calc/help/gcdrem
+/usr/share/calc/help/gd
+/usr/share/calc/help/getenv
+/usr/share/calc/help/hash
+/usr/share/calc/help/head
+/usr/share/calc/help/help
+/usr/share/calc/help/highbit
+/usr/share/calc/help/history
+/usr/share/calc/help/hmean
+/usr/share/calc/help/hnrmod
+/usr/share/calc/help/hypot
+/usr/share/calc/help/ilog
+/usr/share/calc/help/ilog10
+/usr/share/calc/help/ilog2
+/usr/share/calc/help/im
+/usr/share/calc/help/indices
+/usr/share/calc/help/inputlevel
+/usr/share/calc/help/insert
+/usr/share/calc/help/int
+/usr/share/calc/help/interrupt
+/usr/share/calc/help/intro
+/usr/share/calc/help/inverse
+/usr/share/calc/help/iroot
+/usr/share/calc/help/isalnum
+/usr/share/calc/help/isalpha
+/usr/share/calc/help/isassoc
+/usr/share/calc/help/isatty
+/usr/share/calc/help/isblk
+/usr/share/calc/help/iscntrl
+/usr/share/calc/help/isconfig
+/usr/share/calc/help/isdefined
+/usr/share/calc/help/isdigit
+/usr/share/calc/help/iserror
+/usr/share/calc/help/iseven
+/usr/share/calc/help/isfile
+/usr/share/calc/help/isgraph
+/usr/share/calc/help/ishash
+/usr/share/calc/help/isident
+/usr/share/calc/help/isint
+/usr/share/calc/help/islist
+/usr/share/calc/help/islower
+/usr/share/calc/help/ismat
+/usr/share/calc/help/ismult
+/usr/share/calc/help/isnull
+/usr/share/calc/help/isnum
+/usr/share/calc/help/isobj
+/usr/share/calc/help/isobjtype
+/usr/share/calc/help/isodd
+/usr/share/calc/help/isprime
+/usr/share/calc/help/isprint
+/usr/share/calc/help/isptr
+/usr/share/calc/help/ispunct
+/usr/share/calc/help/isqrt
+/usr/share/calc/help/isrand
+/usr/share/calc/help/israndom
+/usr/share/calc/help/isreal
+/usr/share/calc/help/isrel
+/usr/share/calc/help/issimple
+/usr/share/calc/help/isspace
+/usr/share/calc/help/issq
+/usr/share/calc/help/isstr
+/usr/share/calc/help/istype
+/usr/share/calc/help/isupper
+/usr/share/calc/help/isxdigit
+/usr/share/calc/help/jacobi
+/usr/share/calc/help/join
+/usr/share/calc/help/lcm
+/usr/share/calc/help/lcmfact
+/usr/share/calc/help/lfactor
+/usr/share/calc/help/libcalc
+/usr/share/calc/help/list
+/usr/share/calc/help/ln
+/usr/share/calc/help/log
+/usr/share/calc/help/lowbit
+/usr/share/calc/help/ltol
+/usr/share/calc/help/makelist
+/usr/share/calc/help/man
+/usr/share/calc/help/mat
+/usr/share/calc/help/matdim
+/usr/share/calc/help/matfill
+/usr/share/calc/help/matmax
+/usr/share/calc/help/matmin
+/usr/share/calc/help/matsum
+/usr/share/calc/help/mattrace
+/usr/share/calc/help/mattrans
+/usr/share/calc/help/max
+/usr/share/calc/help/memsize
+/usr/share/calc/help/meq
+/usr/share/calc/help/min
+/usr/share/calc/help/minv
+/usr/share/calc/help/mmin
+/usr/share/calc/help/mne
+/usr/share/calc/help/mod
+/usr/share/calc/help/modify
+/usr/share/calc/help/name
+/usr/share/calc/help/near
+/usr/share/calc/help/new_custom
+/usr/share/calc/help/newerror
+/usr/share/calc/help/nextcand
+/usr/share/calc/help/nextprime
+/usr/share/calc/help/norm
+/usr/share/calc/help/null
+/usr/share/calc/help/num
+/usr/share/calc/help/obj
+/usr/share/calc/help/oldvalue
+/usr/share/calc/help/operator
+/usr/share/calc/help/ord
+/usr/share/calc/help/overview
+/usr/share/calc/help/param
+/usr/share/calc/help/perm
+/usr/share/calc/help/pfact
+/usr/share/calc/help/pi
+/usr/share/calc/help/pix
+/usr/share/calc/help/places
+/usr/share/calc/help/pmod
+/usr/share/calc/help/polar
+/usr/share/calc/help/poly
+/usr/share/calc/help/pop
+/usr/share/calc/help/popcnt
+/usr/share/calc/help/pound
+/usr/share/calc/help/power
+/usr/share/calc/help/prevcand
+/usr/share/calc/help/prevprime
+/usr/share/calc/help/printf
+/usr/share/calc/help/prompt
+/usr/share/calc/help/protect
+/usr/share/calc/help/ptest
+/usr/share/calc/help/push
+/usr/share/calc/help/putenv
+/usr/share/calc/help/quo
+/usr/share/calc/help/quomod
+/usr/share/calc/help/rand
+/usr/share/calc/help/randbit
+/usr/share/calc/help/random
+/usr/share/calc/help/randombit
+/usr/share/calc/help/randperm
+/usr/share/calc/help/rcin
+/usr/share/calc/help/rcmul
+/usr/share/calc/help/rcout
+/usr/share/calc/help/rcpow
+/usr/share/calc/help/rcsq
+/usr/share/calc/help/re
+/usr/share/calc/help/remove
+/usr/share/calc/help/resource
+/usr/share/calc/help/reverse
+/usr/share/calc/help/rewind
+/usr/share/calc/help/rm
+/usr/share/calc/help/root
+/usr/share/calc/help/round
+/usr/share/calc/help/rsearch
+/usr/share/calc/help/runtime
+/usr/share/calc/help/saveval
+/usr/share/calc/help/scale
+/usr/share/calc/help/scan
+/usr/share/calc/help/scanf
+/usr/share/calc/help/script
+/usr/share/calc/help/search
+/usr/share/calc/help/sec
+/usr/share/calc/help/sech
+/usr/share/calc/help/seed
+/usr/share/calc/help/segment
+/usr/share/calc/help/select
+/usr/share/calc/help/sgn
+/usr/share/calc/help/sha1
+/usr/share/calc/help/sin
+/usr/share/calc/help/sinh
+/usr/share/calc/help/size
+/usr/share/calc/help/sizeof
+/usr/share/calc/help/sleep
+/usr/share/calc/help/sort
+/usr/share/calc/help/sqrt
+/usr/share/calc/help/srand
+/usr/share/calc/help/srandom
+/usr/share/calc/help/ssq
+/usr/share/calc/help/statement
+/usr/share/calc/help/stoponerror
+/usr/share/calc/help/str
+/usr/share/calc/help/strcasecmp
+/usr/share/calc/help/strcat
+/usr/share/calc/help/strcmp
+/usr/share/calc/help/strcpy
+/usr/share/calc/help/strerror
+/usr/share/calc/help/strlen
+/usr/share/calc/help/strncasecmp
+/usr/share/calc/help/strncmp
+/usr/share/calc/help/strncpy
+/usr/share/calc/help/strpos
+/usr/share/calc/help/strprintf
+/usr/share/calc/help/strscan
+/usr/share/calc/help/strscanf
+/usr/share/calc/help/strtolower
+/usr/share/calc/help/strtoupper
+/usr/share/calc/help/substr
+/usr/share/calc/help/sum
+/usr/share/calc/help/swap
+/usr/share/calc/help/system
+/usr/share/calc/help/systime
+/usr/share/calc/help/tail
+/usr/share/calc/help/tan
+/usr/share/calc/help/tanh
+/usr/share/calc/help/test
+/usr/share/calc/help/time
+/usr/share/calc/help/todo
+/usr/share/calc/help/trunc
+/usr/share/calc/help/type
+/usr/share/calc/help/types
+/usr/share/calc/help/unexpected
+/usr/share/calc/help/usage
+/usr/share/calc/help/usertime
+/usr/share/calc/help/variable
+/usr/share/calc/help/version
+/usr/share/calc/help/wishlist
+/usr/share/calc/help/xor
+/usr/share/calc/hms.cal
+/usr/share/calc/infinities.cal
+/usr/share/calc/intfile.cal
+/usr/share/calc/intnum.cal
+/usr/share/calc/lambertw.cal
+/usr/share/calc/linear.cal
+/usr/share/calc/lnseries.cal
+/usr/share/calc/lucas.cal
+/usr/share/calc/lucas_chk.cal
+/usr/share/calc/mersenne.cal
+/usr/share/calc/mfactor.cal
+/usr/share/calc/mod.cal
+/usr/share/calc/natnumset.cal
+/usr/share/calc/pell.cal
+/usr/share/calc/pi.cal
+/usr/share/calc/pix.cal
+/usr/share/calc/pollard.cal
+/usr/share/calc/poly.cal
+/usr/share/calc/prompt.cal
+/usr/share/calc/psqrt.cal
+/usr/share/calc/qtime.cal
+/usr/share/calc/quat.cal
+/usr/share/calc/randbitrun.cal
+/usr/share/calc/randmprime.cal
+/usr/share/calc/randombitrun.cal
+/usr/share/calc/randomrun.cal
+/usr/share/calc/randrun.cal
+/usr/share/calc/regress.cal
+/usr/share/calc/repeat.cal
+/usr/share/calc/screen.cal
+/usr/share/calc/seedrandom.cal
+/usr/share/calc/set8700.cal
+/usr/share/calc/set8700.line
+/usr/share/calc/smallfactors.cal
+/usr/share/calc/solve.cal
+/usr/share/calc/specialfunctions.cal
+/usr/share/calc/statistics.cal
+/usr/share/calc/strings.cal
+/usr/share/calc/sumsq.cal
+/usr/share/calc/sumtimes.cal
+/usr/share/calc/surd.cal
+/usr/share/calc/test1700.cal
+/usr/share/calc/test2300.cal
+/usr/share/calc/test2600.cal
+/usr/share/calc/test2700.cal
+/usr/share/calc/test3100.cal
+/usr/share/calc/test3300.cal
+/usr/share/calc/test3400.cal
+/usr/share/calc/test3500.cal
+/usr/share/calc/test4000.cal
+/usr/share/calc/test4100.cal
+/usr/share/calc/test4600.cal
+/usr/share/calc/test5100.cal
+/usr/share/calc/test5200.cal
+/usr/share/calc/test8400.cal
+/usr/share/calc/test8500.cal
+/usr/share/calc/test8600.cal
+/usr/share/calc/test8900.cal
+/usr/share/calc/toomcook.cal
+/usr/share/calc/unitfrac.cal
+/usr/share/calc/varargs.cal
+/usr/share/calc/xx_print.cal
+/usr/share/calc/zeta2.cal
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/calc/align32.h
+/usr/include/calc/alloc.h
+/usr/include/calc/args.h
+/usr/include/calc/blkcpy.h
+/usr/include/calc/block.h
+/usr/include/calc/byteswap.h
+/usr/include/calc/calc.h
+/usr/include/calc/calcerr.h
+/usr/include/calc/cmath.h
+/usr/include/calc/conf.h
+/usr/include/calc/config.h
+/usr/include/calc/custom.h
+/usr/include/calc/decl.h
+/usr/include/calc/endian_calc.h
+/usr/include/calc/file.h
+/usr/include/calc/fposval.h
+/usr/include/calc/func.h
+/usr/include/calc/hash.h
+/usr/include/calc/have_const.h
+/usr/include/calc/have_fpos.h
+/usr/include/calc/have_fpos_pos.h
+/usr/include/calc/have_getpgid.h
+/usr/include/calc/have_getprid.h
+/usr/include/calc/have_getsid.h
+/usr/include/calc/have_gettime.h
+/usr/include/calc/have_memmv.h
+/usr/include/calc/have_newstr.h
+/usr/include/calc/have_offscl.h
+/usr/include/calc/have_posscl.h
+/usr/include/calc/have_rusage.h
+/usr/include/calc/have_stdlib.h
+/usr/include/calc/have_strdup.h
+/usr/include/calc/have_string.h
+/usr/include/calc/have_times.h
+/usr/include/calc/have_uid_t.h
+/usr/include/calc/have_unistd.h
+/usr/include/calc/have_unused.h
+/usr/include/calc/have_urandom.h
+/usr/include/calc/have_ustat.h
+/usr/include/calc/hist.h
+/usr/include/calc/jump.h
+/usr/include/calc/label.h
+/usr/include/calc/lib_calc.h
+/usr/include/calc/lib_util.h
+/usr/include/calc/longbits.h
+/usr/include/calc/nametype.h
+/usr/include/calc/opcodes.h
+/usr/include/calc/prime.h
+/usr/include/calc/qmath.h
+/usr/include/calc/sha1.h
+/usr/include/calc/str.h
+/usr/include/calc/symbol.h
+/usr/include/calc/terminal.h
+/usr/include/calc/token.h
+/usr/include/calc/value.h
+/usr/include/calc/zmath.h
+/usr/include/calc/zrand.h
+/usr/include/calc/zrandom.h
+/usr/lib/libcalc.so
+/usr/lib/libcustcalc.so
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/calc/COPYING
 /usr/share/package-licenses/calc/COPYING-LGPL
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/calc.1
+
+%files plugins
+%defattr(-,root,root,-)
+/usr/lib/libcalc.so.2.12.7.2
+/usr/lib/libcustcalc.so.2.12.7.2
