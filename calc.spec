@@ -4,10 +4,10 @@
 #
 Name     : calc
 Version  : 2.12.7.2
-Release  : 3
+Release  : 6
 URL      : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
 Source0  : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
-Summary  : No detailed summary available
+Summary  : Arbitrary precision console calculator
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: calc-bin = %{version}-%{release}
@@ -16,12 +16,18 @@ Requires: calc-lib = %{version}-%{release}
 Requires: calc-license = %{version}-%{release}
 Requires: calc-man = %{version}-%{release}
 BuildRequires : less
+BuildRequires : ncurses-dev
+BuildRequires : readline-dev
 BuildRequires : util-linux
+Patch1: readline.patch
 
 %description
-Calc standard resource files
-----------------------------
-To load a resource file, try:
+# What is calc?
+Calc is an interactive calculator which provides for easy large
+Otherwise, it enters interactive mode.  In this mode, it accepts
+commands one at a time, processes them, and displays the answers.
+In the simplest case, commands are simply expressions which are
+evaluated.  For example, the following line can be input:
 
 %package bin
 Summary: bin components for the calc package.
@@ -48,6 +54,7 @@ Requires: calc-lib = %{version}-%{release}
 Requires: calc-bin = %{version}-%{release}
 Requires: calc-data = %{version}-%{release}
 Provides: calc-devel = %{version}-%{release}
+Requires: calc = %{version}-%{release}
 
 %description dev
 dev components for the calc package.
@@ -81,19 +88,26 @@ man components for the calc package.
 
 %prep
 %setup -q -n calc-2.12.7.2
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1553278796
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1557076441
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make
 
 
 %install
-export SOURCE_DATE_EPOCH=1553278796
+export SOURCE_DATE_EPOCH=1557076441
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp COPYING %{buildroot}/usr/share/package-licenses/calc/COPYING

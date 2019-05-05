@@ -1,0 +1,32 @@
+--- calc-2.12.7.2/Makefile~	2018-11-28 20:12:10.000000000 +0000
++++ calc-2.12.7.2/Makefile	2019-05-05 16:59:30.361804753 +0000
+@@ -895,14 +895,14 @@
+ #
+ # If in doubt, set USE_READLINE, READLINE_LIB and READLINE_INCLUDE to nothing.
+ #
+-USE_READLINE=
+-#USE_READLINE= -DUSE_READLINE
++#USE_READLINE=
++USE_READLINE= -DUSE_READLINE
+ #
+-READLINE_LIB=
+-READLINE_EXTRAS=
++#READLINE_LIB=
++#READLINE_EXTRAS=
+ #
+-#READLINE_LIB= -lreadline
+-#READLINE_EXTRAS= -lhistory -lncurses
++READLINE_LIB= -lreadline
++READLINE_EXTRAS= -lhistory -lncurses
+ #
+ #READLINE_LIB= -L/usr/gnu/lib -lreadline
+ #READLINE_EXTRAS= -lhistory -lncurses
+@@ -1734,7 +1734,7 @@
+ else
+ ICFLAGS= ${COMMON_CFLAGS} ${CC_SHARE}
+ endif
+-CFLAGS= ${ICFLAGS} ${CCOPT}
++CFLAGS += ${ICFLAGS} ${CCOPT}
+ 
+ # Required flags to link files for calc
+ #

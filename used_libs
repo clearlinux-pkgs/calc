@@ -1,1 +1,4 @@
 libc.so.6
+libhistory.so.8
+libreadline.so.7
+libtinfow.so.6

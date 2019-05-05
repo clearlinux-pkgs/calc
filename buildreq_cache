@@ -1,3 +1,5 @@
 2.12.7.2
 less
+ncurses-dev
+readline-dev
 util-linux
