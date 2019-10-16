@@ -4,10 +4,10 @@
 #
 Name     : calc
 Version  : 2.12.7.2
-Release  : 6
+Release  : 7
 URL      : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
 Source0  : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
-Summary  : Arbitrary precision console calculator
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: calc-bin = %{version}-%{release}
@@ -22,12 +22,9 @@ BuildRequires : util-linux
 Patch1: readline.patch
 
 %description
-# What is calc?
-Calc is an interactive calculator which provides for easy large
-Otherwise, it enters interactive mode.  In this mode, it accepts
-commands one at a time, processes them, and displays the answers.
-In the simplest case, commands are simply expressions which are
-evaluated.  For example, the following line can be input:
+Calc standard resource files
+----------------------------
+To load a resource file, try:
 
 %package bin
 Summary: bin components for the calc package.
@@ -94,8 +91,9 @@ man components for the calc package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557076441
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1571205126
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -107,11 +105,11 @@ make
 
 
 %install
-export SOURCE_DATE_EPOCH=1557076441
+export SOURCE_DATE_EPOCH=1571205126
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
-cp COPYING %{buildroot}/usr/share/package-licenses/calc/COPYING
-cp COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/COPYING-LGPL
+cp %{_builddir}/calc-2.12.7.2/COPYING %{buildroot}/usr/share/package-licenses/calc/ac5b4dd239458d463b8be5b834e0398a88265ae3
+cp %{_builddir}/calc-2.12.7.2/COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/fc024cea7b58639d903adbe7015b34ee1584ced8
 %make_install T=%{buildroot} LIBDIR=/usr/lib64
 
 %files
@@ -644,8 +642,8 @@ cp COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/COPYING-LGPL
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/calc/COPYING
-/usr/share/package-licenses/calc/COPYING-LGPL
+/usr/share/package-licenses/calc/ac5b4dd239458d463b8be5b834e0398a88265ae3
+/usr/share/package-licenses/calc/fc024cea7b58639d903adbe7015b34ee1584ced8
 
 %files man
 %defattr(0644,root,root,0755)
