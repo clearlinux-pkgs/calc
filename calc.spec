@@ -4,7 +4,7 @@
 #
 Name     : calc
 Version  : 2.12.7.2
-Release  : 7
+Release  : 8
 URL      : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
 Source0  : https://github.com/lcn2/calc/releases/download/2.12.7.2/calc-2.12.7.2.tar.bz2
 Summary  : No detailed summary available
@@ -85,6 +85,7 @@ man components for the calc package.
 
 %prep
 %setup -q -n calc-2.12.7.2
+cd %{_builddir}/calc-2.12.7.2
 %patch1 -p1
 
 %build
@@ -92,20 +93,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571205126
+export SOURCE_DATE_EPOCH=1604886412
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make
 
 
 %install
-export SOURCE_DATE_EPOCH=1571205126
+export SOURCE_DATE_EPOCH=1604886412
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp %{_builddir}/calc-2.12.7.2/COPYING %{buildroot}/usr/share/package-licenses/calc/ac5b4dd239458d463b8be5b834e0398a88265ae3
