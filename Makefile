@@ -1,5 +1,5 @@
 PKG_NAME := calc
-URL = https://github.com/lcn2/calc/releases/download/2.12.8.1/calc-2.12.8.1.tar.bz2
+URL = https://github.com/lcn2/calc/releases/download/v2.12.8.2/calc-2.12.8.2.tar.bz2
 ARCHIVES = 
 
 include ../common/Makefile.common
