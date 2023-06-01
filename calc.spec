@@ -4,10 +4,10 @@
 # Using build pattern: make
 #
 Name     : calc
-Version  : 2.14.1.5
-Release  : 15
-URL      : https://github.com/lcn2/calc/releases/download/v2.14.1.5/calc-2.14.1.5.tar.bz2
-Source0  : https://github.com/lcn2/calc/releases/download/v2.14.1.5/calc-2.14.1.5.tar.bz2
+Version  : 2.14.1.6
+Release  : 16
+URL      : https://github.com/lcn2/calc/releases/download/v2.14.1.6/calc-2.14.1.6.tar.bz2
+Source0  : https://github.com/lcn2/calc/releases/download/v2.14.1.6/calc-2.14.1.6.tar.bz2
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -85,32 +85,47 @@ man components for the calc package.
 
 
 %prep
-%setup -q -n calc-2.14.1.5
-cd %{_builddir}/calc-2.14.1.5
+%setup -q -n calc-2.14.1.6
+cd %{_builddir}/calc-2.14.1.6
+pushd ..
+cp -a calc-2.14.1.6 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1679682547
+export SOURCE_DATE_EPOCH=1685627898
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 make
 
+pushd ../buildavx2
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+make
+popd
 
 %install
-export SOURCE_DATE_EPOCH=1679682547
+export SOURCE_DATE_EPOCH=1685627898
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp %{_builddir}/calc-%{version}/COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/fc024cea7b58639d903adbe7015b34ee1584ced8 || :
+pushd ../buildavx2/
+%make_install_v3 T=%{buildroot} LIBDIR=/usr/lib64
+popd
 %make_install T=%{buildroot} LIBDIR=/usr/lib64
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -630,8 +645,8 @@ cp %{_builddir}/calc-%{version}/COPYING-LGPL %{buildroot}/usr/share/package-lice
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libcalc.so.2.14.1.5
-/usr/lib64/libcustcalc.so.2.14.1.5
+/usr/lib64/libcalc.so.2.14.1.6
+/usr/lib64/libcustcalc.so.2.14.1.6
 
 %files license
 %defattr(0644,root,root,0755)
