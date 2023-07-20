@@ -5,7 +5,7 @@
 #
 Name     : calc
 Version  : 2.14.1.6
-Release  : 16
+Release  : 17
 URL      : https://github.com/lcn2/calc/releases/download/v2.14.1.6/calc-2.14.1.6.tar.bz2
 Source0  : https://github.com/lcn2/calc/releases/download/v2.14.1.6/calc-2.14.1.6.tar.bz2
 Summary  : No detailed summary available
@@ -96,7 +96,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685627898
+export SOURCE_DATE_EPOCH=1689829468
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -117,7 +117,7 @@ make
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1685627898
+export SOURCE_DATE_EPOCH=1689829468
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp %{_builddir}/calc-%{version}/COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/fc024cea7b58639d903adbe7015b34ee1584ced8 || :
