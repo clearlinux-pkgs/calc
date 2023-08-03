@@ -4,10 +4,10 @@
 # Using build pattern: make
 #
 Name     : calc
-Version  : 2.14.2.0
-Release  : 18
-URL      : https://github.com/lcn2/calc/releases/download/v2.14.2.0/calc-2.14.2.0.tar.bz2
-Source0  : https://github.com/lcn2/calc/releases/download/v2.14.2.0/calc-2.14.2.0.tar.bz2
+Version  : 2.14.3.0
+Release  : 19
+URL      : https://github.com/lcn2/calc/releases/download/v2.14.3.0/calc-2.14.3.0.tar.bz2
+Source0  : https://github.com/lcn2/calc/releases/download/v2.14.3.0/calc-2.14.3.0.tar.bz2
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -85,10 +85,10 @@ man components for the calc package.
 
 
 %prep
-%setup -q -n calc-2.14.2.0
-cd %{_builddir}/calc-2.14.2.0
+%setup -q -n calc-2.14.3.0
+cd %{_builddir}/calc-2.14.3.0
 pushd ..
-cp -a calc-2.14.2.0 buildavx2
+cp -a calc-2.14.3.0 buildavx2
 popd
 
 %build
@@ -96,7 +96,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1690206995
+export SOURCE_DATE_EPOCH=1691073551
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -117,7 +117,7 @@ make
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1690206995
+export SOURCE_DATE_EPOCH=1691073551
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp %{_builddir}/calc-%{version}/COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/fc024cea7b58639d903adbe7015b34ee1584ced8 || :
@@ -174,6 +174,7 @@ popd
 /usr/share/calc/ellip.cal
 /usr/share/calc/factorial.cal
 /usr/share/calc/factorial2.cal
+/usr/share/calc/fnv_tool.cal
 /usr/share/calc/gvec.cal
 /usr/share/calc/hello.cal
 /usr/share/calc/help/COPYING
@@ -646,8 +647,8 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libcalc.so.2.14.2.0
-/usr/lib64/libcustcalc.so.2.14.2.0
+/usr/lib64/libcalc.so.2.14.3.0
+/usr/lib64/libcustcalc.so.2.14.3.0
 
 %files license
 %defattr(0644,root,root,0755)
