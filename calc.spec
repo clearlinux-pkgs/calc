@@ -4,10 +4,10 @@
 # Using build pattern: make
 #
 Name     : calc
-Version  : 2.14.3.5
-Release  : 20
-URL      : https://github.com/lcn2/calc/releases/download/v2.14.3.5/calc-2.14.3.5.tar.bz2
-Source0  : https://github.com/lcn2/calc/releases/download/v2.14.3.5/calc-2.14.3.5.tar.bz2
+Version  : 2.15.0.1
+Release  : 21
+URL      : https://github.com/lcn2/calc/releases/download/v2.15.0.1/calc-2.15.0.1.tar.bz2
+Source0  : https://github.com/lcn2/calc/releases/download/v2.15.0.1/calc-2.15.0.1.tar.bz2
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -85,10 +85,10 @@ man components for the calc package.
 
 
 %prep
-%setup -q -n calc-2.14.3.5
-cd %{_builddir}/calc-2.14.3.5
+%setup -q -n calc-2.15.0.1
+cd %{_builddir}/calc-2.15.0.1
 pushd ..
-cp -a calc-2.14.3.5 buildavx2
+cp -a calc-2.15.0.1 buildavx2
 popd
 
 %build
@@ -96,28 +96,48 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1692368219
+export SOURCE_DATE_EPOCH=1696515279
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 make
 
 pushd ../buildavx2
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -m64 -march=x86-64-v3 "
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -m64 -march=x86-64-v3 "
 make
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1692368219
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
+export SOURCE_DATE_EPOCH=1696515279
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp %{_builddir}/calc-%{version}/COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/fc024cea7b58639d903adbe7015b34ee1584ced8 || :
@@ -185,10 +205,19 @@ popd
 /usr/share/calc/help/acosh
 /usr/share/calc/help/acot
 /usr/share/calc/help/acoth
+/usr/share/calc/help/acovercos
+/usr/share/calc/help/acoversin
+/usr/share/calc/help/acrd
 /usr/share/calc/help/acsc
 /usr/share/calc/help/acsch
 /usr/share/calc/help/address
+/usr/share/calc/help/aexcsc
+/usr/share/calc/help/aexsec
 /usr/share/calc/help/agd
+/usr/share/calc/help/ahacovercos
+/usr/share/calc/help/ahacoversin
+/usr/share/calc/help/ahavercos
+/usr/share/calc/help/ahaversin
 /usr/share/calc/help/append
 /usr/share/calc/help/appr
 /usr/share/calc/help/archive
@@ -204,6 +233,8 @@ popd
 /usr/share/calc/help/atan
 /usr/share/calc/help/atan2
 /usr/share/calc/help/atanh
+/usr/share/calc/help/avercos
+/usr/share/calc/help/aversin
 /usr/share/calc/help/avg
 /usr/share/calc/help/base
 /usr/share/calc/help/base2
@@ -223,6 +254,7 @@ popd
 /usr/share/calc/help/calc_tty
 /usr/share/calc/help/calclevel
 /usr/share/calc/help/calcpath
+/usr/share/calc/help/cas
 /usr/share/calc/help/catalan
 /usr/share/calc/help/ceil
 /usr/share/calc/help/cfappr
@@ -230,6 +262,7 @@ popd
 /usr/share/calc/help/change
 /usr/share/calc/help/changes
 /usr/share/calc/help/char
+/usr/share/calc/help/cis
 /usr/share/calc/help/cmdbuf
 /usr/share/calc/help/cmp
 /usr/share/calc/help/comb
@@ -242,7 +275,10 @@ popd
 /usr/share/calc/help/cot
 /usr/share/calc/help/coth
 /usr/share/calc/help/count
+/usr/share/calc/help/covercos
+/usr/share/calc/help/coversin
 /usr/share/calc/help/cp
+/usr/share/calc/help/crd
 /usr/share/calc/help/credit
 /usr/share/calc/help/csc
 /usr/share/calc/help/csch
@@ -272,11 +308,14 @@ popd
 /usr/share/calc/help/error
 /usr/share/calc/help/errorcode
 /usr/share/calc/help/errorcodes
+/usr/share/calc/help/errsym
 /usr/share/calc/help/estr
 /usr/share/calc/help/euler
 /usr/share/calc/help/eval
+/usr/share/calc/help/excsc
 /usr/share/calc/help/exp
 /usr/share/calc/help/expression
+/usr/share/calc/help/exsec
 /usr/share/calc/help/fact
 /usr/share/calc/help/factor
 /usr/share/calc/help/fclose
@@ -327,7 +366,11 @@ popd
 /usr/share/calc/help/gms2g
 /usr/share/calc/help/h2hm
 /usr/share/calc/help/h2hms
+/usr/share/calc/help/hacovercos
+/usr/share/calc/help/hacoversin
 /usr/share/calc/help/hash
+/usr/share/calc/help/havercos
+/usr/share/calc/help/haversin
 /usr/share/calc/help/head
 /usr/share/calc/help/help
 /usr/share/calc/help/highbit
@@ -398,6 +441,8 @@ popd
 /usr/share/calc/help/list
 /usr/share/calc/help/ln
 /usr/share/calc/help/log
+/usr/share/calc/help/log2
+/usr/share/calc/help/logn
 /usr/share/calc/help/lowbit
 /usr/share/calc/help/ltol
 /usr/share/calc/help/makelist
@@ -539,6 +584,8 @@ popd
 /usr/share/calc/help/usage
 /usr/share/calc/help/usertime
 /usr/share/calc/help/variable
+/usr/share/calc/help/vercos
+/usr/share/calc/help/versin
 /usr/share/calc/help/version
 /usr/share/calc/help/wishlist
 /usr/share/calc/help/xor
@@ -574,7 +621,6 @@ popd
 /usr/share/calc/repeat.cal
 /usr/share/calc/screen.cal
 /usr/share/calc/seedrandom.cal
-/usr/share/calc/set8700.cal
 /usr/share/calc/set8700.line
 /usr/share/calc/smallfactors.cal
 /usr/share/calc/solve.cal
@@ -585,26 +631,29 @@ popd
 /usr/share/calc/sumsq.cal
 /usr/share/calc/sumtimes.cal
 /usr/share/calc/surd.cal
-/usr/share/calc/test1700.cal
-/usr/share/calc/test2300.cal
-/usr/share/calc/test2600.cal
-/usr/share/calc/test2700.cal
-/usr/share/calc/test3100.cal
-/usr/share/calc/test3300.cal
-/usr/share/calc/test3400.cal
-/usr/share/calc/test3500.cal
-/usr/share/calc/test4000.cal
-/usr/share/calc/test4100.cal
-/usr/share/calc/test4600.cal
-/usr/share/calc/test5100.cal
-/usr/share/calc/test5200.cal
-/usr/share/calc/test8400.cal
-/usr/share/calc/test8500.cal
-/usr/share/calc/test8600.cal
-/usr/share/calc/test8900.cal
+/usr/share/calc/test2300.obj_incdec.cal
+/usr/share/calc/test2600.numfunc.cal
+/usr/share/calc/test2700.isqrt.cal
+/usr/share/calc/test3100.matobj.cal
+/usr/share/calc/test3300.det.cal
+/usr/share/calc/test3400.trig.cal
+/usr/share/calc/test4000.ptest.cal
+/usr/share/calc/test4100.redc.cal
+/usr/share/calc/test4600.fileop.cal
+/usr/share/calc/test5100.newdecl.cal
+/usr/share/calc/test5200.globstat.cal
+/usr/share/calc/test8000.read.cal
+/usr/share/calc/test8400.quit.cal
+/usr/share/calc/test8500.divmod.cal
+/usr/share/calc/test8600.maxargs.cal
+/usr/share/calc/test8700.dotest.cal
+/usr/share/calc/test8900.special.cal
+/usr/share/calc/test9300.frem.cal
+/usr/share/calc/test9500.trigeq.cal
 /usr/share/calc/toomcook.cal
 /usr/share/calc/unitfrac.cal
 /usr/share/calc/varargs.cal
+/usr/share/calc/write2file.cal
 /usr/share/calc/xx_print.cal
 /usr/share/calc/zeta2.cal
 
@@ -615,16 +664,19 @@ popd
 /usr/include/calc/banned.h
 /usr/include/calc/blkcpy.h
 /usr/include/calc/block.h
+/usr/include/calc/bool.h
 /usr/include/calc/byteswap.h
 /usr/include/calc/calc.h
 /usr/include/calc/cmath.h
 /usr/include/calc/config.h
 /usr/include/calc/custom.h
 /usr/include/calc/decl.h
+/usr/include/calc/errtbl.h
 /usr/include/calc/file.h
 /usr/include/calc/func.h
 /usr/include/calc/hash.h
 /usr/include/calc/hist.h
+/usr/include/calc/int.h
 /usr/include/calc/jump.h
 /usr/include/calc/label.h
 /usr/include/calc/lib_calc.h
@@ -639,6 +691,7 @@ popd
 /usr/include/calc/symbol.h
 /usr/include/calc/token.h
 /usr/include/calc/value.h
+/usr/include/calc/version.h
 /usr/include/calc/zmath.h
 /usr/include/calc/zrand.h
 /usr/include/calc/zrandom.h
@@ -647,10 +700,10 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libcalc.so.2.14.3
-/usr/lib64/libcalc.so.2.14.3.5
-/usr/lib64/libcustcalc.so.2.14.3
-/usr/lib64/libcustcalc.so.2.14.3.5
+/usr/lib64/libcalc.so.2.15.0
+/usr/lib64/libcalc.so.2.15.0.1
+/usr/lib64/libcustcalc.so.2.15.0
+/usr/lib64/libcustcalc.so.2.15.0.1
 
 %files license
 %defattr(0644,root,root,0755)
