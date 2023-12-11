@@ -6,10 +6,10 @@
 # autospec commit: c1050fe
 #
 Name     : calc
-Version  : 2.15.0.1
-Release  : 22
-URL      : https://github.com/lcn2/calc/releases/download/v2.15.0.1/calc-2.15.0.1.tar.bz2
-Source0  : https://github.com/lcn2/calc/releases/download/v2.15.0.1/calc-2.15.0.1.tar.bz2
+Version  : 2.15.0.2
+Release  : 23
+URL      : https://github.com/lcn2/calc/releases/download/v2.15.0.2/calc-2.15.0.2.tar.bz2
+Source0  : https://github.com/lcn2/calc/releases/download/v2.15.0.2/calc-2.15.0.2.tar.bz2
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -87,10 +87,10 @@ man components for the calc package.
 
 
 %prep
-%setup -q -n calc-2.15.0.1
-cd %{_builddir}/calc-2.15.0.1
+%setup -q -n calc-2.15.0.2
+cd %{_builddir}/calc-2.15.0.2
 pushd ..
-cp -a calc-2.15.0.1 buildavx2
+cp -a calc-2.15.0.2 buildavx2
 popd
 
 %build
@@ -98,7 +98,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701939157
+export SOURCE_DATE_EPOCH=1702269463
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -139,7 +139,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1701939157
+export SOURCE_DATE_EPOCH=1702269463
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/calc
 cp %{_builddir}/calc-%{version}/COPYING-LGPL %{buildroot}/usr/share/package-licenses/calc/fc024cea7b58639d903adbe7015b34ee1584ced8 || :
@@ -703,9 +703,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libcalc.so.2.15.0
-/usr/lib64/libcalc.so.2.15.0.1
+/usr/lib64/libcalc.so.2.15.0.2
 /usr/lib64/libcustcalc.so.2.15.0
-/usr/lib64/libcustcalc.so.2.15.0.1
+/usr/lib64/libcustcalc.so.2.15.0.2
 
 %files license
 %defattr(0644,root,root,0755)
